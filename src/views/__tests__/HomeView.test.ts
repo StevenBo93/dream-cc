@@ -1,11 +1,26 @@
-import { describe, it, expect } from 'vitest'
-import { mount } from '@vue/test-utils'
-import HomeView from '@/views/HomeView.vue'
+import { describe, it, expect, beforeEach } from 'vitest';
+import { mount } from '@vue/test-utils';
+import { createPinia, setActivePinia } from 'pinia';
+import HomeView from '@/views/HomeView.vue';
+import CategoryComponent from '@/components/ui/CategoryComponent.vue';
+import router from '@/router';
 
 describe('HomeView', () => {
-  it('correctly loads and renders CategoryComponent', () => {
-    const wrapper = mount(HomeView)
+  beforeEach(() => {
+    setActivePinia(createPinia());
+  });
 
-    expect(wrapper.exists()).equals(true)
-  })
-})
+  it('correctly loads and renders CategoryComponent', async () => {
+
+    const wrapper = mount(HomeView, {
+      global: {
+        plugins: [router, createPinia()],
+      },
+    });
+
+    await router.isReady();
+
+    expect(wrapper.exists()).toBe(true);
+    expect(wrapper.findComponent(CategoryComponent).exists()).toBe(true);
+  });
+});
