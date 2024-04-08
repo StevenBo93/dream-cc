@@ -32,7 +32,7 @@ const isAdditionalNumberSelected = computed(() =>
       <h2 class="font-bold text-2xl mb-4">Gezogene Zahlen</h2>
       <div v-if="loading">Loading...</div>
       <div v-if="error">Error: {{ error.message }}</div>
-      <div class="flex flex-col space-y-6 w-1/452" v-if="result">
+      <div class="flex flex-col space-y-6 w-1/2" v-if="result">
         <div>Eurojackpot Zahlen:</div>
         <div class="grid grid-cols-5">
           <div
